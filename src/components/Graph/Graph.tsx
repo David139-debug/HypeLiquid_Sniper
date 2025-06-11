@@ -1,12 +1,17 @@
 import graph from "./img/tradeview chart.png";
-import MidUp, { type Prop } from "./MidUp";
+import lgGraph from "./img/tradeview chart sm.png"
+import MidUp from "./MidUp";
 
-const Graph = ({ type }: Prop) => {
+interface Prop {
+  sidebar: boolean;
+}
+
+const Graph = ({ sidebar }: Prop) => {
   return (
     <>
-      <MidUp type={type} />
+      <MidUp />
       <article className="p-3 flex items-center justify-center">
-        <img src={graph} className="size w-full" alt="graph" />
+        {sidebar ? <img src={lgGraph} className="size w-full" alt="graph" /> : <img src={graph} className="size w-full" alt="lgGraph" />}
       </article>
     </>
   )

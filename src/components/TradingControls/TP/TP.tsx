@@ -1,5 +1,9 @@
-const TP = () => {
+interface Props {
+    setClickedProfits: React.Dispatch<React.SetStateAction<boolean>>;
+    clickedProfits: boolean;
+}
 
+const TP = ({ clickedProfits, setClickedProfits }: Props) => {
   return (
       <div className="flexColAfter items-start gap-4">
           <div className="flex gap-3">
@@ -8,6 +12,8 @@ const TP = () => {
                   <label className="relative cursor-pointer flex">
                       <input
                           type="checkbox"
+                          onChange={() => setClickedProfits(prev => !prev)}
+                          checked={clickedProfits}
                           className="cursor-pointer peer appearance-none h-[22px] w-[22px] shrink-0 rounded-xs border-2 border-[#787b7f] bg-transparent checked:bg-blue-500 checked:border-blue-500"
                       />
                       <svg

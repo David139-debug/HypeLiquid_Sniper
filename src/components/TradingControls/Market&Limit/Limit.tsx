@@ -5,7 +5,6 @@ import LimitChaser from "../LimitChaser";
 import { LimitOrder } from "../LimitOrder";
 import Profits from "../Profits";
 import Leverage from "../Leverage/Leverage";
-import TP from "../TP/TP";
 
 const Limit = () => {
 
@@ -49,7 +48,6 @@ const Limit = () => {
                       </div>
                   </div>
               </div>
-              <TP />
               <Profits />
               <LimitOrder />
               <div className="flex gap-3 items-center -mt-3 -mb-3">

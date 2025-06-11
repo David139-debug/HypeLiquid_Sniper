@@ -2,7 +2,6 @@ import * as Slider from "@radix-ui/react-slider"
 import { useState } from "react";
 import Profits from "../Profits";
 import Leverage from "../Leverage/Leverage";
-import TP from "../TP/TP";
 import ButtonWrapper from "../ButtonWrapper";
 
 export type Type = "Limit" | "Market";
@@ -50,7 +49,6 @@ const Market = () => {
                     </div>
                 </div>
             </div>
-            <TP />
             <Profits />
             
             <div className="flex flex-col gap-6">
@@ -185,7 +183,7 @@ const Market = () => {
                               <Slider.Root
                                   className="relative flex items-center select-none touch-none w-full h-8"
                                   min={0}
-                                  max={100}
+                                  max={30}
                                   step={1}
                                   disabled={!clickedSplit}
                                   value={[leverage]}
@@ -203,7 +201,7 @@ const Market = () => {
             
                               <div className="flex justify-between text-sm text-white mt-1 font-bold">
                                   <span>0</span>
-                                  <span>100</span>
+                                  <span>30</span>
                               </div>
                           </div>
             <div>

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -10,14 +10,18 @@ let win: BrowserWindow;
 
 function createWindow() {
     win = new BrowserWindow({
+        width: 1200,
+        height: 800,
+        resizable: true,
+        fullscreenable: true,
         show: false,
         webPreferences: {
             contextIsolation: false,
             nodeIntegration: true,
         },
-        frame: false,
-        fullscreen: true
     });
+
+    Menu.setApplicationMenu(null);
 
     win.once('ready-to-show', () => {
         win.show();

@@ -15,10 +15,11 @@ export interface AccountInfo {
 interface AccountProps {
     acc: AccountInfo;
     id: number;
-    handleRemoveCard: (event: number) => void;
-  }
+    getId: (id: number) => void;
+    getName: (name: string) => void;
+}
 
-const Account = ({ acc, id, handleRemoveCard }: AccountProps) => {
+const Account = ({ acc, id, getId, getName }: AccountProps) => {
 
     const [clicked, setClicked] = useState<boolean>(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
@@ -43,17 +44,18 @@ const Account = ({ acc, id, handleRemoveCard }: AccountProps) => {
     return (
         <motion.article
             ref={cardRef}
-            onClick={handleOpenCard}
-            className={`flex flex-col w-[490px] max-w-full bg-[#23272E] p-5 transition-all duration-300 relative rounded-xl ${clicked ? "border border-[#F0B90B]" : ""}`}
+            onClick={() => {
+                handleOpenCard();
+                getId(id);
+                getName(`${acc.title} ${acc.num}`);
+              }}
+            className={`self-start flex flex-col w-[460px] max-w-full bg-[#23272E] p-5 transition-all duration-300 relative rounded-xl ${clicked ? "border border-[#F0B90B]" : ""}`}
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.3 }}
             
             >
-                <svg xmlns="http://www.w3.org/2000/svg" onClick={(e) => { e.stopPropagation(); handleRemoveCard(id); setClicked(false); }} className="cursor-pointer absolute top-2 right-2" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M15.4863 13.3875L12.0475 9.94813L15.485 6.50938L13.7181 4.74063L10.2788 8.17938L6.84001 4.74063L5.07251 6.50938L8.51001 9.94813L5.07251 13.3869L6.84126 15.1544L10.2788 11.7156L13.7163 15.1544L15.4863 13.3875Z" fill="#6B7280" />
-                </svg>
             <div className="mgTop flex justify-between items-center space-y-6">
                 <h1 className="title">{acc.title} {acc.num}</h1>
                 <div className="flex gap-3 items-center justify-end">

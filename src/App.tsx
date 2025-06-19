@@ -11,10 +11,17 @@ function App() {
   const [type, setType] = useState<Buttons>("Limit");
   const [accNum, setAccNum] = useState<number>(10);
   const [sidebar, setSidebar] = useState<boolean>(false);
+  const [modal, setModal] = useState<boolean>(false)
+
 
   return (  
     <section className="w-full min-h-screen">
       <Navbar accNum={accNum} />
+      {modal && (
+        <div className="fixed w-full inset-0 flex items-center justify-center z-50 backdrop-blur-[2px]">
+          <AccountsWrapper setModal={setModal} setAccNum={setAccNum} />
+        </div>
+      )}
       <div className="flex w-full">
         {sidebar && (
           <button className="cursor-pointer rounded-tl-[8px] rounded-tr-none rounded-br-none rounded-bl-[8px]
@@ -26,23 +33,9 @@ function App() {
             </svg>
           </button>
         )}
-        <AnimatePresence>
-          {!sidebar && (
-            <motion.div
-              key="sidebar"
-              initial={{ x: -50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -50, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="w-[350px] lg:w-[420px] shrink-0"
-            >
-              <AccountsWrapper setSidebar={setSidebar} setAccNum={setAccNum} />
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         <div className="flex flex-col flex-grow min-w-0 bg-[#0a0e13] mx-4">
-          <Graph sidebar={sidebar} />
+          <Graph setModal={setModal} sidebar={sidebar} />
           <Tabs />
         </div>
 
